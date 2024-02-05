@@ -1,6 +1,20 @@
 #include <iostream>
+#include <gflags/gflags.h>
+#include <string.h>
 
-int main(int, char **)
+DEFINE_string(name, "tom", "test arg name");
+
+using gflags::ParseCommandLineFlags;
+using gflags::SetUsageMessage;
+using std::cout;
+using std::endl;
+using std::string;
+
+int main(int argc, char **argv)
 {
-    std::cout << "Hello, from perf-baseline!\n";
+
+    SetUsageMessage("hello world");
+    ParseCommandLineFlags(&argc, &argv, true);
+    cout << "hello my name is " << FLAGS_name << " .\n";
+    return 0;
 }
