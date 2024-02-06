@@ -2,6 +2,7 @@
 #include <string.h>
 #include <fmt/core.h>
 #include <argparse/argparse.hpp>
+#include <cpus/cycle.hpp>
 
 using std::cout;
 using std::endl;
@@ -18,7 +19,7 @@ void parse_args(int argc, char **argv)
 int main(int argc, char **argv)
 {
     parse_args(argc, argv);
-    auto input = args.get<bool>("verbose");
-    fmt::print("hello perf-base {} \n", input);
+    // auto input = args.get<bool>("verbose");
+    bench_cpu_cycle(ITER_TIMES);
     return 0;
 }

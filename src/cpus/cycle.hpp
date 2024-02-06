@@ -7,20 +7,21 @@
 
 #include <x86intrin.h>
 #include <iostream>
+#include <fmt/core.h>
+
+#ifndef PBL_CPU_CYCLE
+#define PBL_CPU_CYCLE
 
 // 迭代 1700w 次
-static const int ITER_TIMES = 1700 * 10000;
+const int ITER_TIMES = 1700 * 10000;
 
 /**
  * 执行 + 1 操作 times 次，打印这个过程中消耗的 CPU 时钟周期
  *
  * times: 要执行 +1 操作的次数
  */
-static void bench_cpu_cycle(const int times)
+void bench_cpu_cycle(const int times)
 {
-    using std::cout;
-    using std::endl;
-
     uint64_t start_cycle{0};
     uint64_t stop_cycle{0};
     u_int64_t sum{0};
@@ -37,12 +38,8 @@ static void bench_cpu_cycle(const int times)
     // 记录完成时的周期数
     stop_cycle = __rdtsc();
 
-    cout << "execute " << times << " times add operator cost " << stop_cycle - start_cycle << " cycles \n";
-    cout << "avg " << (stop_cycle - start_cycle) / 1.0 / times << " cycle(s) per add operator \n";
+    fmt::print("execute {} times add operator cost {} cycles \n", times, stop_cycle - start_cycle);
+    fmt::print("avg {} cycle(s) per add operator \n", (stop_cycle - start_cycle) / 1.0 / times);
 }
 
-int main()
-{
-    bench_cpu_cycle(ITER_TIMES);
-    return 0;
-}
+#endif
