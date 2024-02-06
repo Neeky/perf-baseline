@@ -10,7 +10,7 @@ find_package(fmt CONFIG REQUIRED)
 find_package(argparse CONFIG REQUIRED)
 
 add_subdirectory(src/cpus)
-add_executable(perf-baseline main.cpp)
+add_executable(perf-baseline src/main.cpp)
 target_link_libraries(perf-baseline PRIVATE fmt::fmt)
 target_link_libraries(perf-baseline PRIVATE argparse::argparse)
 
